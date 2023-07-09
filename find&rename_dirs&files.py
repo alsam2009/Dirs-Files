@@ -29,13 +29,13 @@ def get_dirs_files(path):
         #     if(file.endswith(".mp4")):
         #         files_in_course.append(os.path.join(root,file))
         #         # print(os.path.join(root,file))
-    print(f'Готово! Проверьте файл {files_output}')
+    print(f'Done! Check a file: {files_output}')
 
 # Пакетный ренейминг файлов
 
 
 def rename_files(path, pattern):
-    print(f'\nНачал работу по адресу {path}...')
+    print(f'\nStarting on {path}')
     # pattern = "[SW.BAND] " # "[SW.BAND] " - шаблон обрезки: что нужно убрать в наименованиях файлов и папок
     for root, _, files in os.walk(path):
         for file in files:
@@ -48,7 +48,7 @@ def rename_files(path, pattern):
             os.rename(root, root.replace(pattern, ''))
     #     if(file.endswith(".mp4")):
     #         files_in_course.append(os.path.join(root,file))
-    print('Готово!')
+    print('Done!')
 
 
 def main():
