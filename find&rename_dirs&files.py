@@ -1,15 +1,18 @@
-# program accomplish by alsam2009
-
-import os
-import csv
+# program accomplished by alsam2009
+# https://github.com/alsam2009
 
 # Документация по os.walk():
 # https://docs.python.org/3/library/os.html#os.walk
 
+import os
+import csv
+
+# TODO:  add try/catch
+
 # Получатель всех подкаталогов в корне
 def get_dirs_files(path):
     files_in_course = [] # накопитель файлов путей подкаталогов в корневом каталоге
-    files_output = "dirs&files_in_root.csv" # наименование выходного файла с результатом работы
+    files_output = "dirs_in_root.csv" # наименование выходного файла с результатом работы
     for root, dirs, files in os.walk(path):
         # print(dirs) if dirs else None # выводит в консоль все пути каталогов
         # print(files) if files else None # выводит в консоль все файлы каталога и подкаталогов. Возвращает list []
