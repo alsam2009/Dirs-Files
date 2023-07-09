@@ -10,18 +10,19 @@ import csv
 # TODO:  add try/catch
 
 # Получатель всех подкаталогов в корне
+
+
 def get_dirs_files(path):
-    files_in_course = [] # накопитель файлов путей подкаталогов в корневом каталоге
-    files_output = "dirs_in_root.csv" # наименование выходного файла с результатом работы
+    files_in_course = []  # накопитель файлов путей подкаталогов в корневом каталоге
+    # наименование выходного файла с результатом работы
+    files_output = "dirs_in_root.csv"
     for root, dirs, files in os.walk(path):
         # print(dirs) if dirs else None # выводит в консоль все пути каталогов
         # print(files) if files else None # выводит в консоль все файлы каталога и подкаталогов. Возвращает list []
-        files_in_course.append([root])  # добавляет директории и пути к ним в list
-    with open(
-        files_output,
-        "w",
-        newline="",
-    ) as f:  # записывает все директории и пути к ним начиная с рабочей директории (path)
+        # добавляет директории и пути к ним в list
+        files_in_course.append([root])
+    # записывает все директории и пути к ним начиная с рабочей директории (path)
+    with open(files_output, "w", newline="",) as f:
         csv.writer(f, delimiter=";").writerows(files_in_course)
 
         # for file in files:
@@ -31,25 +32,23 @@ def get_dirs_files(path):
     print(f'Готово! Проверьте файл {files_output}')
 
 # Пакетный ренейминг файлов
+
+
 def rename_files(path, pattern):
     print(f'\nНачал работу по адресу {path}...')
     # pattern = "[SW.BAND] " # "[SW.BAND] " - шаблон обрезки: что нужно убрать в наименованиях файлов и папок
     for root, _, files in os.walk(path):
-        if pattern in root:
-            os.rename(
-                    root, root.replace(pattern, '')
-                )
         for file in files:
-            # print(file)
-            if file.startswith(
-                pattern
-            ):
-                os.rename(
-                    os.path.join(root, file), os.path.join(root, file[10:])
-                )  # обрезка наименования файла с 10 символа, т.е. сколько символов в шаблоне обрезки
-
+            if file.startswith(pattern):
+                # обрезка наименования файла с 10 символа, т.е. сколько символов в шаблоне обрезки
+                os.rename(os.path.join(root, file), os.path.join(
+                    root, file[len(pattern):]))
+    for root, _, files in os.walk(path):
+        if pattern in root:
+            os.rename(root, root.replace(pattern, ''))
     #     if(file.endswith(".mp4")):
     #         files_in_course.append(os.path.join(root,file))
+    print('Готово!')
 
 
 def main():
@@ -65,7 +64,8 @@ def main():
             case "2":
                 path = input('Paste root dir here: ')
                 pattern = input('Paste pattern here (eg.: [SW.BAND]): ')
-                rename_files(path,pattern)  # переименовывает все файлы в каталоге (path) и подкаталогах, убирает ненужный паттерн в наименовании файлов
+                # переименовывает все файлы в каталоге (path) и подкаталогах, убирает ненужный паттерн в наименовании файлов
+                rename_files(path, pattern)
             case "3":
                 print('Goodbye!')
                 break
